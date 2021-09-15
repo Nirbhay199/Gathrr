@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names
+// ignore_for_file: camel_case_types, file_names, deprecated_member_use
 import 'package:demo2/Constant/Colors.dart';
 import 'package:demo2/Login.dart';
 import 'package:flutter/gestures.dart';
@@ -15,7 +15,7 @@ class sign extends StatefulWidget {
 }
 
 class _signState extends State<sign> {
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailAddress = TextEditingController();
   TextEditingController passward = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController confirmpassward = TextEditingController();
@@ -25,6 +25,10 @@ class _signState extends State<sign> {
   GlobalKey<FormState> formkey3 = GlobalKey<FormState>();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
+bool a=false;
+ bool b=false;
+ bool c=false; bool d=false;
+
   String? validationpassword(value) {
     if (value.isEmpty) {
       return null;
@@ -32,10 +36,31 @@ class _signState extends State<sign> {
       return 'Should Be Atleast 6 Characters ';
     } else if (value.length > 10) {
       return 'Should Not Be More Then 10 Characters ';
-    } else {
+    } else {a=true;
       return null;
     }
   }
+  bool validateEmail(String value) {
+  String pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  // ignore: unnecessary_new
+  RegExp regex = new RegExp(pattern);
+  return (!regex.hasMatch(value)) ? false : true;
+}
+
+ bool nextScreen(value1,value2,value3,value4){
+ if (!value1.isEmpty&&!value2.isEmpty&&!value3.isEmpty&&!value4.isEmpty) {
+      // ignore: unrelated_type_equality_checks
+      d=true;
+ b=validateEmail(value1);     
+validationpassword(value2); 
+validationConfirmpassword(value3); 
+return (a&&b&&c&&d);
+    } else{
+
+      return false;
+    }
+}
 
   String? validationConfirmpassword(value) {
     if (value.isEmpty) {
@@ -43,6 +68,7 @@ class _signState extends State<sign> {
     } else if (value != passward.text) {
       return 'enter the right passward ';
     } else if (value == passward.text) {
+      c=true;
       return null;
     }
   }
@@ -54,16 +80,17 @@ class _signState extends State<sign> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Padding(
-            padding: const EdgeInsets.only(top: 100),
+            padding: const EdgeInsets.only(top: 55),
+            // ignore: duplicate_ignore
             child: Column(children: [
               Stack(
                 children: [
                   const CircleAvatar(
                     backgroundColor: CustomColors.button,
-                    maxRadius: 101,
+                    maxRadius: 80,
                     child: CircleAvatar(
                       backgroundColor: CustomColors.sendbutton,
-                      maxRadius: 100,
+                      maxRadius: 79,
                       child: Icon(
                         Icons.person,
                         size: 40,
@@ -89,7 +116,7 @@ class _signState extends State<sign> {
                 ],
               ),
               const SizedBox(
-                height: 50,
+                height: 20,
               ),
               Form(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -98,7 +125,7 @@ class _signState extends State<sign> {
                   padding:
                       const EdgeInsets.only(right: 40.0, left: 40, bottom: 20),
                   child: Container(
-                    height: 85,
+                    height: 63,
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       color: CustomColors.textfeild,
@@ -106,11 +133,15 @@ class _signState extends State<sign> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 18.0, bottom: 18.0, left: 25),
-                      child: TextFormField(
+                          top: 10.0, bottom: 10.0, left: 25),
+                      child: TextFormField( style:  const TextStyle(
+                                 fontSize: 18),
+                       
+                        maxLength: 10,
                         controller: nameController,
                         keyboardType: TextInputType.name,
                         decoration: const InputDecoration(
+                          counterText: '',
                           hintText: "Name",
                           icon: Icon(
                             Icons.person,
@@ -124,9 +155,8 @@ class _signState extends State<sign> {
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
+              ),const SizedBox(
+                height: 6,
               ),
               Form(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -135,7 +165,7 @@ class _signState extends State<sign> {
                   padding:
                       const EdgeInsets.only(right: 40.0, left: 40, bottom: 20),
                   child: Container(
-                    height: 85,
+                    height: 63,
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       color: CustomColors.textfeild,
@@ -143,9 +173,9 @@ class _signState extends State<sign> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 18.0, bottom: 18.0, left: 25),
+                          top: 10.0, bottom: 10.0, left: 25),
                       child: TextFormField(
-                          controller: phoneController,
+                          controller: emailAddress,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
                             hintText: "Email",
@@ -163,9 +193,8 @@ class _signState extends State<sign> {
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
+              ),const SizedBox(
+                height: 6,
               ),
               Form(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -174,7 +203,7 @@ class _signState extends State<sign> {
                   padding:
                       const EdgeInsets.only(right: 40.0, left: 40, bottom: 20),
                   child: Container(
-                    height: 85,
+                    height: 63,
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       color: CustomColors.textfeild,
@@ -182,8 +211,9 @@ class _signState extends State<sign> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 18.0, bottom: 18.0, left: 25),
+                          top: 10.0, bottom: 10.0, left: 25),
                       child: TextFormField(
+                          obscureText: true,
                         controller: passward,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: const InputDecoration(
@@ -204,7 +234,7 @@ class _signState extends State<sign> {
               ),
 
               const SizedBox(
-                height: 10,
+                height: 6,
               ),
               Form(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -213,7 +243,7 @@ class _signState extends State<sign> {
                   padding:
                       const EdgeInsets.only(right: 40.0, left: 40, bottom: 20),
                   child: Container(
-                    height: 85,
+                    height: 63,
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       color: CustomColors.textfeild,
@@ -221,8 +251,9 @@ class _signState extends State<sign> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 18.0, bottom: 18.0, left: 25),
+                          top: 10.0, bottom: 10.0, left: 25),
                       child: TextFormField(
+                          obscureText: true,
                         controller: confirmpassward,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: const InputDecoration(
@@ -242,29 +273,41 @@ class _signState extends State<sign> {
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 20,
               ),
-              // ignore: deprecated_member_use
-              FlatButton(
-                onPressed: () {
-                  Navigator.push(
+          Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [ 
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width/1.7,
+                      decoration: BoxDecoration(
+                          color: CustomColors.button,
+              
+                  borderRadius:
+                      BorderRadius.circular(15),
+              
+                      ),
+                      child:FlatButton(
+                  onPressed: () {
+                if (nextScreen(emailAddress.text, passward.text,confirmpassward.text,nameController.text)) {
+                    Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Register()));
-                          
-                },
-                child: const Text(
-                  "Register",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold),
-                ),
-                color: CustomColors.button,
-                padding: const EdgeInsets.only(
-                    left: 150, right: 150, top: 20, bottom: 20),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
+                                    builder: (context) =>  Register(nameController)));
+                } else {
+                      
+                }    
+                },              
+                    child: const Text(
+                        "Register",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 40,
@@ -294,6 +337,8 @@ class _signState extends State<sign> {
                         )),
                   ],
                 ),
+              ), const SizedBox(
+                height: 40,
               ),
             ]),
           ),

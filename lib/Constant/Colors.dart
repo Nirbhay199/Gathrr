@@ -12,6 +12,7 @@ class CustomColors {
     begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [Color(0xff5663FF), Colors.black]);
+  
   static const Color text= Color(0xFF5663FF);
   static const Color textfeild= Color(0x266C63FF);
 

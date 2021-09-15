@@ -42,11 +42,11 @@ class _passwardforgotState extends State<passwardforgot> {
           backgroundColor: Colors.transparent,
         ),
         backgroundColor: Colors.transparent,
-        body: SafeArea(
+        body: SingleChildScrollView(
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: 80.0, bottom: 80),
+                padding: EdgeInsets.only(top: 50.0, bottom: 80),
                 child: Text(
                   '\t\tEnter your email and will send\nyou instruction on how to reset it ',
                   style: TextStyle(
@@ -62,7 +62,7 @@ class _passwardforgotState extends State<passwardforgot> {
                   padding:
                       const EdgeInsets.only(right: 40.0, left: 40, bottom: 20),
                   child: Container(
-                    height: 85,
+                    height: 63,
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       color: CustomColors.textfeild,
@@ -70,19 +70,23 @@ class _passwardforgotState extends State<passwardforgot> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 18.0, bottom: 18.0, left: 25),
+                          top: 10.0, bottom: 10.0, left: 25),
                       child: TextFormField(
+                        style:  const TextStyle(
+                                color: Colors.white, fontSize: 18),
                           controller: phoneController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
                             hintText: "Email",
+                            
                             icon: Icon(
                               Icons.email_outlined,
                               color: Colors.white,
+                              
                             ),
                             border: InputBorder.none,
                             hintStyle: TextStyle(
-                                color: CustomColors.text, fontSize: 20),
+                                color: Colors.white, fontSize: 20),
                           ),
                           validator: EmailValidator(
                             errorText: 'Enter a valid email address',
@@ -91,30 +95,38 @@ class _passwardforgotState extends State<passwardforgot> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 100,
-              ),
-              Expanded(
+             
+              SizedBox(height: MediaQuery.of(context).size.height/2.5,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 50),
-                      child: FlatButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Send",
-                          style: TextStyle(
-                              color: CustomColors.text,
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        color: CustomColors.sendbutton,
-                        padding: const EdgeInsets.only(
-                            left: 150, right: 150, top: 20, bottom: 20),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
+                      child:    Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width/1.7,
+                      decoration: BoxDecoration(
+                          color: CustomColors.sendbutton,
+              
+                  borderRadius:
+                      BorderRadius.circular(15),
+              
                       ),
+                    child: FlatButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Send",
+                        style: TextStyle(
+                            color: CustomColors.text,
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
                     ),
                   ],
                 ),
